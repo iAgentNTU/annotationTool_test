@@ -1,0 +1,154 @@
+@media screen and (min-width: 768px) {
+	#upper{
+		width: 80%;
+		height: auto;
+	}
+	
+	#lower{
+		width: 80%;
+		height: 80px;
+	}
+	
+    .line{
+		width: 100%;
+		height: 25vh;
+	}
+	
+	.word{
+		clear: both; 
+		height:40px; 
+		position:relative; 
+		font-size: 250%
+	}
+	
+	/* the label on the left */
+	
+	.sword{
+		clear: both; 
+		height:40px; 
+		position:relative; 
+		font-size: 150%
+	}
+	
+	.choice{
+		background-color: #33FFFF;
+	}
+	
+	@media (min-width: 980px) {
+		.choicecontainer{
+			width: 25%; 
+			height: 100px; 
+			float: left;
+		}
+	}
+	
+	@media (max-width: 979px) {
+		.choicecontainer{
+			width: 50%; 
+			height: 100px; 
+			float: left;
+		}
+	}
+	
+	.innerchoice{
+		width: 98.75%;
+		margin-bottom: 2px;
+		height: 80px;
+		background-color: #FFFF00;
+		border-radius: 10px;
+	}
+	
+	#form1{
+		width: 80%;
+		padding-top: 20px;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	#title{
+		font-size: 200%;
+	}
+	
+	#time{
+		font-size: 150%;
+	}
+	
+	#integrated{
+		width: 80%;
+		height: 50px;
+	}
+	
+    .line{
+		width: 100%;
+		height: 10vh;
+	}
+	
+	.word{
+		clear: both; 
+		height:40px; 
+		position:relative; 
+		font-size: 200%
+	}
+	
+	/* the label on the left */
+	
+	.sword{
+		clear: both; 
+		height:40px; 
+		position:relative; 
+		font-size: 150%
+	}
+	
+	.innerchoice{
+		width: 98.75%;
+		margin-bottom: 2px;
+		height: 50px;
+		background-color: #FFFF00;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+	
+	#form1{
+		width: 98%;
+		padding-top: 3px;
+	}
+}
+
+.category{
+	width: 25%; 
+	height: 100%; 
+	float: left; 
+	line-height:100%; 
+	text-align:center; 
+}
+
+.middle{
+	width: 95%;
+	height: 95%;
+	margin: 2.5%;
+	border-radius: 10px;
+	cursor: pointer; 
+}
+
+#open{
+	width: 80%;
+	height: auto;
+	display: none;
+}
+
+.long{
+	width: 98.75%;
+	height: 97.5%;
+	margin-left: 0.625%;
+	margin-top: 1.25%;
+	border-radius: 10px;
+	background-color: #33FFFF;
+	cursor: pointer; 
+}
+
+.floater{
+	float:left; 
+	width: 100%;
+	height:50%; 
+	margin-bottom:-10px
+}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Annotation_Tool{% endblock %}
+
+{% block logInOut_content %}
+
+{% endblock %}
+{% block userName %}
+{% if userName %}{{ userName }}{% else %}{% endif %}
+{% endblock %}
+
+{% block page_content %}
+
+	<script src="{{ url_for('static', filename='label.js') }}"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='label.css') }}">
+	<div class="page-header row" align="center">
+		<div id="picturearea" class="col-sm-6" align="center">
+			<h1 align="center">How many people are in this picture?</h1>
+    			<div id="picframe" align="center" style="width: 80%">
+				<img id="pic" style="width: 100%; height: 100%">
+			</div>
+    			<h2 id="time" align="center"></h2><br>
+			<div id="upper" class="visible-sm visible-md visible-lg row"></div>
+			<div id="lower" class="visible-sm visible-md visible-lg">
+				<div class="choice long" value="Others" onclick="light(this)">
+					<div class="floater"></div>
+					<div id="word1" class="sword">Others</div>
+				</div>
+			</div>
+			<div id="integrated" class="visible-xs">
+				<div class="choice long" value="Integrated" onclick="light(this)">
+					<div class="floater"></div>
+					<div id="word2" class="sword">Select label</div>
+				</div>
+			</div>
+			<div id="open">
+				<div id="lastinner" class="innerchoice">
+					<div id="form1" class="input-group input-group-lg">
+						<input id="labelinput" type="text" class="form-control" placeholder="What's going on here...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" onclick="setvalue();">Set</button>
+						</span>
+				    </div>
+			   </div>
+			</div>
+		</div>
+		<div id="buttonarea" class="col-sm-6"></div>
+	</div>
+	<script>
+		buildup();
+                setpic("{{ pic }}");	
+	</script>
+
+{% endblock %}
