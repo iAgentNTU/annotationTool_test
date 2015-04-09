@@ -10,8 +10,7 @@ from ..util import *
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html',
-                           known=session.get('known'))
+    return redirect(url_for('auth.login'))
 
 
 @main.route('/label', methods=['GET'])
