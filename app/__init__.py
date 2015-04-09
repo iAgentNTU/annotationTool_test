@@ -22,7 +22,7 @@ def create_app(config_name):
     # moment.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
-    app.permanent_session_lifetime = timedelta(seconds=20)
+    app.permanent_session_lifetime = timedelta(hours=20)
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
