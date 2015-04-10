@@ -4,22 +4,24 @@ from . import db, login_manager
 
 
 class Data(db.Model):
-    __tablename__ = 'data'
+    __tablename__ = 'data_test'
     labelTime = db.Column(db.String(256))
     attribute = db.Column(db.String(256))
     value = db.Column(db.Integer(10))
     pictureNum = db.Column(db.String(256))
     userid = db.Column(db.Integer(10))
     label = db.Column(db.String(256))
+    duration = db.Column(db.Integer(10))
     id = db.Column(db.Integer(10), primary_key=True, autoincrement=True)
 
-    def __init__(self, labelTime, attribute, value, pictureNum, userid, label):
+    def __init__(self, labelTime, attribute, value, pictureNum, userid, label, duration):
         self.labelTime = labelTime
         self.attribute = attribute
         self.value = value
         self.pictureNum = pictureNum
         self.userid = userid
         self.label = label
+        self.duration = duration
 
     def __repr__(self):
         return '<Share %r>' % self.labelTime
@@ -32,7 +34,7 @@ class Pictures(db.Model):
 
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'users'
+    __tablename__ = 'users_test'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), unique=True, index=True)

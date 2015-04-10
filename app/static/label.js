@@ -11,13 +11,11 @@ function setvalue(){
 	var value = document.getElementById('labelinput').value;
 	label_post = value;
 	document.getElementById('word1').innerHTML = value;
-	document.getElementById('word2').innerHTML = value;
 	document.getElementById('open').style.display = 'none';
 }
 
 function setdefaultvalue(label){
 	label_post = label;
-	document.getElementById('word2').innerHTML = label;
 	document.getElementById('open').style.display = 'none';
 }
 
@@ -27,14 +25,13 @@ function clearchoice(){
 	var elems = document.getElementsByClassName('choice');
 	for(i=0; i<elems.length; ++i)
 		elems[i].style.backgroundColor = GENERAL;
-	document.getElementById('word2').innerHTML = 'Select label';
 	document.getElementById('open').style.display = 'none';
 }
 
 function setupchoice(div){
 	choice = div.getAttribute("value");
 	label_post = choice;
-	if(choice == 'Others' || choice == 'Integrated')
+	if(choice == 'Others')
 		document.getElementById('open').style.display = 'block';
 	div.style.backgroundColor = CHOSEN;
 }
@@ -52,7 +49,6 @@ function refreshchoice(){
 	choice = 'None';
 	label_post = 'None';
 	document.getElementById('word1').innerHTML = 'Others';
-	document.getElementById('word2').innerHTML = 'Select label';
 	document.getElementById('labelinput').value = '';
 	clearchoice();
 }
@@ -60,35 +56,49 @@ function refreshchoice(){
 
 // main part
 
-function record(num){
+var progress = 0;
+var timestamp;
+
+function record(){
+	if(label_post == 'None'){
+		alert('Choose a label');
+		return;
+	}
+	var timediff = new Date().getTime() - timestamp;
 	var pic = document.getElementById('pic');
-	$.post("/record/"+pic.getAttribute('value')+"/"+num+"/"+label_post, function(response){
+	$.post("/record/"+pic.getAttribute('value')+"/"+label_post+"/"+timediff, function(response){
 		//console.log(response.pic);
 		setpic(response.pic);
 	});
 	clearchoice();
 }
 
+function show(s){
+	++progress;
+	return '('+progress+'/400)  '+s.substring(0,4)+'/'+s.substring(4,6)+'/'+s.substring(6,8)+' '+s.substring(9,11)+':'+s.substring(11,13);
+}
+
 function setpic(newpic){
 	picObj = document.getElementById('pic');
 	picObj.setAttribute("value", newpic);
 	picObj.src = "http://disa.csie.ntu.edu.tw/~janetyc/data/"+newpic.substring(0,8)+"/image_"+newpic+".jpg";
-	document.getElementById('time').innerHTML = newpic;
+	document.getElementById('time').innerHTML = show(newpic);
+	timestamp = new Date().getTime();
+	/*
 	picObj.onerror = function(){ 
 		$.getJSON('/newpic', function(response){
 			setpic(response.pic);
 		});
 	}
+	*/
 }
 
 
 // initiating
 		
-function buildupper(){
-	category = ['Meeting', 'Lecture', 'Study', 'Empty'];
-	
+function buildup(){
 	upper = document.getElementById('upper');
-	for(i=0; i<4; ++i){
+	for(i=0; i<category.length; ++i){
 		choicecontainer = document.createElement("div");
 		choicecontainer.setAttribute("class", "choicecontainer");
 		middle = document.createElement("div");
@@ -105,60 +115,4 @@ function buildupper(){
 		choicecontainer.appendChild(middle);
 		upper.appendChild(choicecontainer);
 	}
-}
-		
-function buildinner(){
-	open = document.getElementById('open');
-	lastinner = document.getElementById('lastinner');
-	for(i=0; i<category.length; ++i){
-		innerchoice = document.createElement("div");
-		innerchoice.setAttribute("class", "visible-xs innerchoice");
-		innerchoice.setAttribute("onclick","setdefaultvalue('"+category[i]+"');");
-		floater = document.createElement("div");
-		floater.setAttribute("class", "floater");
-		word = document.createElement("div");
-		word.setAttribute("class", "sword");
-		word.innerHTML = category[i];
-		innerchoice.appendChild(floater);
-		innerchoice.appendChild(word);
-		open.insertBefore(innerchoice, lastinner);
-	}
-}
-		
-function color(idx){
-	depth = (15-idx).toString(16);
-	return depth + depth + 'ff' + depth + depth;
-}
-		
-function buildbuttonarea(){
-	buttonarea = document.getElementById('buttonarea');
-	for(i=0; i<4; ++i){
-		line = document.createElement("div");
-		line.setAttribute("class", "line");
-		for(j=0; j<4; ++j){
-			idx = i*4+j; 
-			category = document.createElement("div");
-			category.setAttribute("class", "category");
-			middle = document.createElement("div");
-			middle.setAttribute("class", "middle");
-			middle.setAttribute("style", "background-color: #"+color(idx));
-			middle.setAttribute("onclick", "record("+idx+")");
-			floater = document.createElement("div");
-			floater.setAttribute("class", "floater");
-			word = document.createElement("div");
-			word.setAttribute("class", "word");
-			word.innerHTML = idx.toString();
-			middle.appendChild(floater);
-			middle.appendChild(word);
-			category.appendChild(middle);
-			line.appendChild(category);
-		}
-		buttonarea.appendChild(line);
-	}
-}
-
-function buildup(){
-	buildupper();
-	buildinner();
-	buildbuttonarea();
 }

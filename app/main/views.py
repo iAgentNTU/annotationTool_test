@@ -38,8 +38,8 @@ def newpic():
     return jsonify({'pic': pic})
 
 
-@main.route('/record/<pictureNum>/<value>/<label>', methods=['POST'])
-def data(pictureNum, value, label):
+@main.route('/record/<pictureNum>/<label>/<duration>', methods=['POST'])
+def data(pictureNum, label, duration):
     # session['id'] = random.randint(0, 50)
     print type(pictureNum), len(pictureNum)
     if len(pictureNum) < 13:
@@ -48,10 +48,11 @@ def data(pictureNum, value, label):
 
     now = datetime.now()
     labelTime = now.strftime("%Y%m%d-%H%M")
-    attribute = 'num_people'
+    value = 412
+    attribute = 'pilot'
     userid = session.get('id')[0]
     data = Data(labelTime=labelTime, attribute=attribute, value=value,
-                pictureNum=pictureNum, userid=userid, label=label)
+                pictureNum=pictureNum, userid=userid, label=label, duration=duration)
     db.session.add(data)
     db.session.commit()
 

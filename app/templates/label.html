@@ -15,24 +15,18 @@
 	<script src="{{ url_for('static', filename='label.js') }}"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="{{ url_for('static', filename='label.css') }}">
-	<div class="page-header row" align="center">
-		<div id="picturearea" class="col-sm-6" align="center">
-			<h1 align="center">How many people are in this picture?</h1>
+	<div class="page-header" align="center">
+		<div id="picturearea" align="center">
+			<h1 align="center">What is the activity in this picture?</h1>
     			<div id="picframe" align="center" style="width: 80%">
 				<img id="pic" style="width: 100%; height: 100%">
 			</div>
     			<h2 id="time" align="center"></h2><br>
-			<div id="upper" class="visible-sm visible-md visible-lg row"></div>
-			<div id="lower" class="visible-sm visible-md visible-lg">
+			<div id="upper" class="row"></div>
+			<div id="lower">
 				<div class="choice long" value="Others" onclick="light(this)">
 					<div class="floater"></div>
 					<div id="word1" class="sword">Others</div>
-				</div>
-			</div>
-			<div id="integrated" class="visible-xs">
-				<div class="choice long" value="Integrated" onclick="light(this)">
-					<div class="floater"></div>
-					<div id="word2" class="sword">Select label</div>
 				</div>
 			</div>
 			<div id="open">
@@ -45,8 +39,13 @@
 				    </div>
 			   </div>
 			</div>
+			<div id="submit">
+				<div id="innersubmit" class="long" value="Others" onclick="record()">
+					<div class="floater"></div>
+					<div id="word1" class="sword">Next</div>
+				</div>
+			</div>
 		</div>
-		<div id="buttonarea" class="col-sm-6"></div>
 	</div>
 	<script>
 		buildup();
