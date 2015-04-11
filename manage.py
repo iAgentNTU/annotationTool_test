@@ -5,7 +5,7 @@ from flask.ext.script import Server, Manager, prompt_bool
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 manager = Manager(app)
-# manager.add_command('runserver', Server(host='0.0.0.0', port=5050))
+# manager.add_command('runserver', Server(host='0.0.0.0', port=1200))
 
 
 @manager.command
