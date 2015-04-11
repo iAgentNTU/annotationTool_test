@@ -28,7 +28,7 @@ class Data(db.Model):
 
 
 class Pictures(db.Model):
-    __tablename__ = 'pictures'
+    __tablename__ = 'pictures_test'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     pic = db.Column(db.String(20))
 

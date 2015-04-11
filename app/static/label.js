@@ -59,6 +59,11 @@ function refreshchoice(){
 var progress = 0;
 var timestamp;
 
+function replace(page){
+	document.write(page);
+	document.close();
+}
+
 function record(){
 	if(label_post == 'None'){
 		alert('Choose a label');
@@ -67,7 +72,9 @@ function record(){
 	var timediff = new Date().getTime() - timestamp;
 	var pic = document.getElementById('pic');
 	$.post("/record/"+pic.getAttribute('value')+"/"+label_post+"/"+timediff, function(response){
+		//console.log(response);
 		//console.log(response.pic);
+		if(typeof(response) == 'string') replace(response);
 		setpic(response.pic);
 	});
 	clearchoice();
