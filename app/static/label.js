@@ -7,11 +7,13 @@ const CHOSEN = '#FF3300';
 
 // get label_post from he left side
 
-function setvalue(){
+document.addEventListener("keyup", keyup, false);
+function keyup(event){
 	var value = document.getElementById('labelinput').value;
+	if(value == '') value = 'Others';
 	label_post = value;
 	document.getElementById('word1').innerHTML = value;
-	document.getElementById('open').style.display = 'none';
+	//document.getElementById('open').style.display = 'none';
 }
 
 function setdefaultvalue(label){
@@ -77,7 +79,7 @@ function record(){
 		if(typeof(response) == 'string') replace(response);
 		setpic(response.pic);
 	});
-	clearchoice();
+	refreshchoice();
 }
 
 function show(s){
