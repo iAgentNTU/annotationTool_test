@@ -14,7 +14,7 @@ def get_shuffled_id():
     # print piclist
     return ','.join(piclist)
 
-
+'''
 def getpic(userid):
     user = User.query.filter_by(id=userid)[0]
     pool = str(user.picturepool).split(',')
@@ -30,6 +30,16 @@ def getpic(userid):
         return nextpic
     except IndexError:
         return getpic(userid)
+'''
+def getpic(userid):
+    user = User.query.filter_by(id=userid)[0]
+    progress = user.progress
+    total = user.total
+    if progress < total:
+        nextpic = Pictures.query.filter_by(id=progress+1)[0].pic
+        return nextpic, progress+1, total
+    else:
+        return None, None, None
 
 if __name__ == '__main__':
     for i in range(50):

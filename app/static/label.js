@@ -58,7 +58,6 @@ function refreshchoice(){
 
 // main part
 
-var progress = 0;
 var timestamp;
 
 function replace(page){
@@ -77,21 +76,20 @@ function record(){
 		//console.log(response);
 		//console.log(response.pic);
 		if(typeof(response) == 'string') replace(response);
-		setpic(response.pic);
+		setpic(response.pic, response.idx, response.ttl);
 	});
 	refreshchoice();
 }
 
-function show(s){
-	++progress;
-	return '('+progress+'/400)  '+s.substring(0,4)+'/'+s.substring(4,6)+'/'+s.substring(6,8)+' '+s.substring(9,11)+':'+s.substring(11,13);
+function show(s, idx, ttl){
+	return '('+idx+'/'+ttl+')  '+s.substring(0,4)+'/'+s.substring(4,6)+'/'+s.substring(6,8)+' '+s.substring(9,11)+':'+s.substring(11,13);
 }
 
-function setpic(newpic){
+function setpic(newpic, newidx, ttlidx){
 	picObj = document.getElementById('pic');
 	picObj.setAttribute("value", newpic);
 	picObj.src = "http://disa.csie.ntu.edu.tw/~janetyc/data/"+newpic.substring(0,8)+"/image_"+newpic+".jpg";
-	document.getElementById('time').innerHTML = show(newpic);
+	document.getElementById('time').innerHTML = show(newpic, newidx, ttlidx);
 	timestamp = new Date().getTime();
 	/*
 	picObj.onerror = function(){ 
